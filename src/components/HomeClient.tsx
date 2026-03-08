@@ -1,6 +1,7 @@
 'use client'
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect} from 'react'
 import {AnimatePresence, motion} from "motion/react"
+import { useRouter } from "next/navigation"
 import axios from "axios"
 function HomeClient({email} : {email:string}) {
   const handleLogin=() => {
@@ -20,6 +21,7 @@ function HomeClient({email} : {email:string}) {
     return () => document.removeEventListener("mousedown", handler)
   },[])
 
+  const navigate = useRouter()
   const featuress = [
   {
     title: "Instant Integration",
@@ -63,7 +65,7 @@ const handleLogout = async () => {
               exit={{opacity:0,y:-3}}
 
               className='absolute right-0 mt-3 w-44 bg-white rounded-xl shadow-xl border border-zinc-200 overflow-hidden'>
-              <button className='w-full text-left px-4 py-3 text-sm hover:bg-zinc-100'>Dashboard</button>
+              <button className='w-full text-left px-4 py-3 text-sm hover:bg-zinc-100'onClick={() => navigate.push("/dashboard")}>Dashboard</button>
               <button className='w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-zinc-100'onClick={handleLogout}>Logout</button>
 
              </motion.div>)}
@@ -88,7 +90,7 @@ const handleLogout = async () => {
               </p>
               <div className='mt-10 flex gap-4'>
 
-                {email?<button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60'>Go To Dashboard</button>: <button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60' onClick={handleLogin}>Get Started</button>}
+                {email?<button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60'onClick={() => navigate.push("/dashboard")}>Go To Dashboard</button>: <button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60' onClick={handleLogin}>Get Started</button>}
               
               <a href='#features' className='px-6 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</a>
               </div>
