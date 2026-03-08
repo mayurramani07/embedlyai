@@ -18,6 +18,21 @@ function HomeClient({email} : {email:string}) {
     document.addEventListener("mousedown", handler)
     return () => document.removeEventListener("mousedown", handler)
   },[])
+
+  const featuress = [
+  {
+    title: "Instant Integration",
+    desc: "Add the AI chatbot to your website in seconds with a single script."
+  },
+  {
+    title: "Fully Controlled Knowledge",
+    desc: "Train the AI using your own business data and control exactly what it answers."
+  },
+  {
+    title: "24/7 Smart Support",
+    desc: "Provide instant responses to customer queries anytime, without human intervention."
+  }
+]
   return (
     <div className='min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden'>
         <motion.div 
@@ -64,7 +79,7 @@ function HomeClient({email} : {email:string}) {
 
                 {email?<button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60'>Go To Dashboard</button>: <button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60' onClick={handleLogin}>Get Started</button>}
               
-              <button className='px-6 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</button>
+              <a href='#features' className='px-6 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</a>
               </div>
           </motion.div>
           <motion.div
@@ -80,12 +95,48 @@ function HomeClient({email} : {email:string}) {
                 <div className='bg-zinc-100 rounded-lg px-4 py-2 text-sm w-fit'>Yes, Cash on delivery is available.</div>
 
               </div>
-
+              <motion.div
+              animate={{y : [0,12,0]}}
+              transition={{repeat: Infinity, duration: 3}}
+              className='absolute -bottom-6 -right-6 w-14 h-14 rounded-full bg-black text-white flex items-center justify-center shadow-xl'
+              >
+              🗨️
+             </motion.div>
             </div>
           </motion.div>
         </div>
 
       </section>
+      <section id='features' className='bg-zinc-50 py-28 px-6 border-t border-zinc-200'>
+        <div>
+          <motion.h2 
+          initial={{opacity:0, y:20}}
+          whileInView={{opacity:1, y:0}}
+          viewport={{once: false}}
+          transition={{duration: 0.5 }}
+          className='text-3xl font-semibold text-center'>
+            Why choose embedly<span className='text-zinc-400'>AI</span> for your business?
+          </motion.h2>
+          <div className='mt-16 grid grid-cols-1 md:grid-cols-3 gap-10'>
+            {featuress.map((f,index)=> (
+              <motion.div
+              key={index}
+              initial={{opacity:0, y:30}}
+              whileInView={{opacity:1, y:0}}
+              transition={{delay: index * 0.1}}
+              viewport={{once: false}}
+              className='bg-white rounded-2xl p-8 shadow-lg border border-zinc-200'> 
+
+              <h1 className='text-lg font-medium'>{f.title}</h1>
+              <p className='mt-3 text-zinc-600 text-sm'>{f.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <footer className='py-10 text-center text-sm text-zinc-500'>
+        &copy; {new Date().getFullYear()} embedlyAI.{" "}All rights reserved
+      </footer>
     </div>
   )
 }
