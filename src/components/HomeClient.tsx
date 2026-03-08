@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {AnimatePresence, motion} from "motion/react"
 function HomeClient({email} : {email:string}) {
   const handleLogin=() => {
@@ -8,6 +8,16 @@ function HomeClient({email} : {email:string}) {
   const firstLetter = email?.[0]?.toUpperCase() || ''
 
   const [open, setOpen] = useState(false)
+  const popupRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const handler = (e:MouseEvent) => {
+
+      if(popupRef.current && !popupRef.current.contains(e.target as Node))
+      setOpen(false)
+    }
+    document.addEventListener("mousedown", handler)
+    return () => document.removeEventListener("mousedown", handler)
+  },[])
   return (
     <div className='min-h-screen bg-linear-to-br from-white to-zinc-50 text-zinc-900 overflow-x-hidden'>
         <motion.div 
@@ -17,7 +27,7 @@ function HomeClient({email} : {email:string}) {
         className='fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl border-b border-zinc-200'>
         <div className='max-w-7xl mx-auto px-6 h-16 flex items-center justify-between'>
             <div className='text-lg font-semibold tracking-tight'>embedly<span className='text-zinc-400'>AI</span></div>
-            {email?<div className='relative'>
+            {email?<div className='relative' ref={popupRef}>
              <button className='w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-semibold text-lg hover:scale-105 transition' onClick={() => setOpen(!open)}>{firstLetter}</button>
              <AnimatePresence>
              {open && (
