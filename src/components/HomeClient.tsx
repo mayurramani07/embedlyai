@@ -47,7 +47,45 @@ function HomeClient({email} : {email:string}) {
         </div>
 
         </motion.div>
-        
+      <section className='pt-36 pb-28 px-6'>
+        <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center'>
+          <motion.div
+            initial={{opacity: 0, y: 40}}
+            animate={{opacity: 1, y:0}}
+            transition={{duration : 0.7}}>
+              <h1 className='text-3xl md:text-3xl font-semibold leading-tight'>
+                AI-Powered Customer Support <br />
+               Built for Modern Businesses
+              </h1>
+              <p className='mt-6 text-lg text-zinc-600 max-w-xl'>Launch an intelligent AI chatbot for your website in minutes. 
+              Train it with your own business knowledge and let customers get instant, accurate support anytime.
+              </p>
+              <div className='mt-10 flex gap-4'>
+
+                {email?<button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60'>Go To Dashboard</button>: <button className='px-6 py-2 rounded-xl bg-black text-white font-medium hover:bg-zinc-800 transition disabled:opacity-60' onClick={handleLogin}>Get Started</button>}
+              
+              <button className='px-6 py-3 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 transition'>Learn More</button>
+              </div>
+          </motion.div>
+          <motion.div
+          initial={{opacity: 0, scale: 0.95}}
+          animate={{opacity: 1, scale: 1}}
+          transition={{duration: 0.7, delay: 0.2}}
+          className="relative"
+          >
+            <div className='rounded-2xl bg-white shadow-2xl border border-zinc-200 p-6'>
+              <div className='text-sm text-zinc-500 mb-3'>Live Chat Preview</div>
+              <div className='space-y-3'>
+                <div className='bg-black text-white rounded-lg px-4 py-2 text-sm ml-auto w-fit'>Do you offer cash on delivery?</div>
+                <div className='bg-zinc-100 rounded-lg px-4 py-2 text-sm w-fit'>Yes, Cash on delivery is available.</div>
+
+              </div>
+
+            </div>
+          </motion.div>
+        </div>
+
+      </section>
     </div>
   )
 }
