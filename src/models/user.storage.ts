@@ -30,6 +30,7 @@ const userStorageSchema = new Schema<IUserStorage>(
   { timestamps: true }
 );
 
-const userStorage = mongoose.models.Setting || model("Setting", userStorageSchema);
+const userStorage =
+  mongoose.models.UserStorage || model("UserStorage", userStorageSchema);
 
 export default userStorage;
