@@ -12,6 +12,7 @@ const userStorageSchema = new Schema<IUserStorage>(
     ownerId: {
       type: String,
       required: true,
+      unique: true
     },
     businessName: {
       type: String,
