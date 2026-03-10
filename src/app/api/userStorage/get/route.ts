@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
+
     const ownerId = req.nextUrl.searchParams.get("ownerId");
 
     if (!ownerId) {
@@ -17,10 +18,19 @@ export async function GET(req: NextRequest) {
 
     const storage = await userStorage.findOne({ ownerId });
 
-    return NextResponse.json(storage);
+    if (!storage) {
+      return NextResponse.json(
+        { message: "User storage not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(storage, { status: 200 });
 
   } catch (error) {
-    console.error(error);
+
+    console.error("GET /api/userStorage error:", error);
+
     return NextResponse.json(
       { message: "Internal Server Error" },
       { status: 500 }
