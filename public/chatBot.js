@@ -1,6 +1,6 @@
 (function () {
 
-const api_url = "http://localhost:3000/api/chatbot"
+const api_url = "https://embedlyai.vercel.app/api/chatbot"
 const scriptTag = document.currentScript;
 const ownerId = scriptTag.getAttribute("data-owner-id")
 
